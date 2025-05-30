@@ -1,0 +1,22 @@
+# .github/workflows/reusable.yml
+name: Reusable Workflow
+
+on:
+  workflow_call:  # Makes this workflow reusable
+    inputs:
+      username:
+        required: true
+        type: string
+    secrets:
+      TOKEN:
+        required: true
+
+jobs:
+  greet-user:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greet the user
+        run: echo "Hello, ${{ inputs.username }}!"
+        
+      - name: Use the secret
+        run: echo "The secret token starts with: ${{ secrets.TOKEN }}"
